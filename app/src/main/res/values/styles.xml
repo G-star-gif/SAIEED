@@ -1,0 +1,5 @@
+<resources>
+    <style name="Theme.SAIEEDcla" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
+</resources>
