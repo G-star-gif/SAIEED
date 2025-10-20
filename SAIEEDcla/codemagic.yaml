@@ -1,0 +1,32 @@
+workflows:
+  android-workflow:
+    name: Build Android APK
+    max_build_duration: 30
+    environment:
+      vars:
+        JAVA_VERSION: 17
+    scripts:
+      - name: Ensure Gradle available (try apt-get install if wrapper missing)
+        script: |
+          if [ -f ./gradlew ]; then
+            chmod +x ./gradlew || true
+          else
+            echo "gradlew not found in repo root"
+          fi
+          if ! command -v gradle >/dev/null 2>&1; then
+            apt-get update -y || true
+            apt-get install -y gradle || true
+          fi
+      - name: Build Debug APK
+        script: |
+          if [ -f ./gradlew ]; then
+            ./gradlew clean assembleDebug || gradle clean assembleDebug
+          else
+            gradle clean assembleDebug
+          fi
+    artifacts:
+      - app/build/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com
