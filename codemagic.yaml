@@ -7,12 +7,17 @@ workflows:
         JAVA_VERSION: 17
         ANDROID_SDK_VERSION: 34
     scripts:
+      - name: Prepare Gradle Wrapper
+        script: |
+          cd SAIEED
+          chmod +x gradlew
       - name: Build Debug APK
         script: |
-          chmod +x gradlew
+          cd SAIEED
+          ./gradlew clean
           ./gradlew assembleDebug
     artifacts:
-      - app/build/outputs/**/*.apk
+      - SAIEED/app/build/outputs/**/*.apk
     publishing:
       email:
         recipients:
