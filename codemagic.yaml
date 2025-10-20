@@ -9,15 +9,13 @@ workflows:
     scripts:
       - name: Prepare Gradle Wrapper
         script: |
-          cd SAIEED
           chmod +x gradlew
       - name: Build Debug APK
         script: |
-          cd SAIEED
           ./gradlew clean
           ./gradlew assembleDebug
     artifacts:
-      - SAIEED/app/build/outputs/**/*.apk
+      - app/build/outputs/**/*.apk
     publishing:
       email:
         recipients:
